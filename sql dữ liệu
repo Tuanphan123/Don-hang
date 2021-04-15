@@ -1,0 +1,77 @@
+create table KHTHANHVIEN
+(
+MaKH char(10),
+HoTen varchar(50),
+Diachi varchar(50),
+SDT char(10),
+primary key(MaKH)
+)
+create table MONAN
+(
+Mamon char(10),
+Tenmon varchar(50),
+Gia char(10),
+Tinhtrang char(10),
+Hinhanh image,
+Thongtin varchar(50),
+Phanloai char(10),
+primary key(Mamon)
+)
+create table NHANVIEN
+(
+MaNV char(10),
+TenNV varchar(50),
+MaCN char(10),
+Ca char(10),
+SDT char(10),
+Username varchar(50),
+Pass varchar(50),
+primary key (MaNV, Username),
+)
+create table CHINHANH
+(
+MaCN char(10),
+TenCN nvarchar(50),
+DiaChi nvarchar(50),
+SDT char(11),
+Email varchar(50),
+MaNVQL char(10),
+primary key(MaCN),
+foreign key (MaNVQL) references NHANVIEN(MaNV),
+)
+
+create table HOADON
+(
+MaHD char(10),
+Thoigian datetime,
+Mamon char(10),
+Tiennhan int,
+Tienthoi int,
+Tongtien int,
+MaNV char(10),
+MaCN char(10),
+primary key (MaHD),
+foreign key (MaCN) references CHINHANH(MaCN),
+foreign key (MaNV) references NHANVIEN(MaNV),
+foreign key (Mamon) references MONAN(Mamon),
+)
+CREATE TABLE WORK
+(
+MaNV CHAR(10),
+MaCN CHAR(10),
+foreign key (MaCN) references CHINHANH(MaCN),
+foreign key (MaNV) references NHANVIEN(MaNV),
+PRIMARY KEY (MaCN, MaNV),
+)
+create table LICHSUDATHANG
+(
+MaKH char(10),
+MaHD char(10),
+Noinhan nvarchar(50),
+primary key(MaKH, MaHD),
+foreign key (MaKH) references KHTHANHVIEN(MaKH),
+foreign key (MaHD) references HOADON(MaHD),
+)
+
+
+
